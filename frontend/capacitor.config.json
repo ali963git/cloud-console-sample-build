@@ -1,0 +1,17 @@
+{
+  "appId": "com.cryptix.app",
+  "appName": "Cryptix",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "iosScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#0D1B2A",
+      "showSpinner": false
+    }
+  }
+}

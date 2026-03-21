@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Cryptix</string>
+    <string name="title_activity_main">Cryptix</string>
+    <string name="package_name">com.cryptix.app</string>
+    <string name="custom_url_scheme">com.cryptix.app</string>
+</resources>
