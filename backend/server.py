@@ -300,6 +300,91 @@ async def get_chart_data(coin_id: str, days: int = 7):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch chart: {str(e)}")
 
+class DepositRequest(BaseModel):
+    amount: float
+    payment_method: str  # card, bank_transfer, crypto
+
+class WithdrawRequest(BaseModel):
+    amount: float
+    payment_method: str
+
+# Deposit endpoints
+@api_router.post("/wallet/deposit", response_model=Transaction)
+async def deposit_funds(deposit: DepositRequest, current_user: dict = Depends(get_current_user)):
+    wallet = await db.wallets.find_one({"user_id": current_user['id']})
+    if not wallet:
+        raise HTTPException(status_code=404, detail="Wallet not found")
+    
+    if deposit.amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be positive")
+    
+    # Update USD balance
+    usd_balance = wallet['balances'].get('USD', 0)
+    wallet['balances']['USD'] = usd_balance + deposit.amount
+    wallet['updated_at'] = datetime.now(timezone.utc).isoformat()
+    
+    await db.wallets.update_one(
+        {"user_id": current_user['id']},
+        {"$set": {"balances": wallet['balances'], "updated_at": wallet['updated_at']}}
+    )
+    
+    # Create transaction record
+    transaction = Transaction(
+        user_id=current_user['id'],
+        type="deposit",
+        crypto_symbol="USD",
+        amount=deposit.amount,
+        price_usd=1.0,
+        total_usd=deposit.amount
+    )
+    
+    tx_doc = transaction.model_dump()
+    tx_doc['timestamp'] = tx_doc['timestamp'].isoformat()
+    tx_doc['payment_method'] = deposit.payment_method
+    await db.transactions.insert_one(tx_doc)
+    
+    return transaction
+
+@api_router.post("/wallet/withdraw", response_model=Transaction)
+async def withdraw_funds(withdraw: WithdrawRequest, current_user: dict = Depends(get_current_user)):
+    wallet = await db.wallets.find_one({"user_id": current_user['id']})
+    if not wallet:
+        raise HTTPException(status_code=404, detail="Wallet not found")
+    
+    if withdraw.amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be positive")
+    
+    usd_balance = wallet['balances'].get('USD', 0)
+    
+    if usd_balance < withdraw.amount:
+        raise HTTPException(status_code=400, detail="Insufficient balance")
+    
+    # Update USD balance
+    wallet['balances']['USD'] = usd_balance - withdraw.amount
+    wallet['updated_at'] = datetime.now(timezone.utc).isoformat()
+    
+    await db.wallets.update_one(
+        {"user_id": current_user['id']},
+        {"$set": {"balances": wallet['balances'], "updated_at": wallet['updated_at']}}
+    )
+    
+    # Create transaction record
+    transaction = Transaction(
+        user_id=current_user['id'],
+        type="withdraw",
+        crypto_symbol="USD",
+        amount=withdraw.amount,
+        price_usd=1.0,
+        total_usd=withdraw.amount
+    )
+    
+    tx_doc = transaction.model_dump()
+    tx_doc['timestamp'] = tx_doc['timestamp'].isoformat()
+    tx_doc['payment_method'] = withdraw.payment_method
+    await db.transactions.insert_one(tx_doc)
+    
+    return transaction
+
 # Wallet endpoints
 @api_router.get("/wallet", response_model=WalletBalance)
 async def get_wallet(current_user: dict = Depends(get_current_user)):

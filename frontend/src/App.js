@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Trading from './pages/Trading';
 import Wallet from './pages/Wallet';
+import Deposit from './pages/Deposit';
 import './App.css';
 
 function App() {
@@ -44,6 +45,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Wallet />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/deposit"
+                element={
+                  <ProtectedRoute>
+                    <Deposit />
                   </ProtectedRoute>
                 }
               />

@@ -41,6 +41,22 @@ export const cryptoApi = {
     return response.data;
   },
 
+  depositFunds: async (amount, paymentMethod) => {
+    const response = await axios.post(`${API}/wallet/deposit`, {
+      amount,
+      payment_method: paymentMethod
+    });
+    return response.data;
+  },
+
+  withdrawFunds: async (amount, paymentMethod) => {
+    const response = await axios.post(`${API}/wallet/withdraw`, {
+      amount,
+      payment_method: paymentMethod
+    });
+    return response.data;
+  },
+
   getTransactions: async (limit = 50) => {
     const response = await axios.get(`${API}/transactions?limit=${limit}`);
     return response.data;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cryptoApi } from '../services/api';
-import { Wallet as WalletIcon, TrendingUp, Clock } from 'lucide-react';
+import { Wallet as WalletIcon, TrendingUp, Clock, Plus, ArrowDownToLine } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
@@ -9,6 +10,7 @@ const Wallet = () => {
   const [transactions, setTransactions] = useState([]);
   const [prices, setPrices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -73,16 +75,26 @@ const Wallet = () => {
           animate={{ opacity: 1, y: 0 }}
           className="glass-effect rounded-2xl p-8 mb-8 border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] shadow-lg shadow-blue-500/30">
-              <WalletIcon className="w-8 h-8 text-white" />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] shadow-lg shadow-blue-500/30">
+                <WalletIcon className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">إجمالي قيمة المحفظة</p>
+                <h2 className="font-mono text-4xl font-black" data-testid="total-portfolio-value">
+                  ${getTotalPortfolioValue().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </h2>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-[hsl(var(--muted-foreground))]">إجمالي قيمة المحفظة</p>
-              <h2 className="font-mono text-4xl font-black" data-testid="total-portfolio-value">
-                ${getTotalPortfolioValue().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </h2>
-            </div>
+            <button
+              onClick={() => navigate('/deposit')}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-bold hover:shadow-lg hover:shadow-blue-500/50 transition-all flex items-center gap-2"
+              data-testid="deposit-button"
+            >
+              <Plus className="w-5 h-5" />
+              إيداع أموال
+            </button>
           </div>
         </motion.div>
 
@@ -150,17 +162,29 @@ const Wallet = () => {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                          tx.type === 'buy' ? 'bg-green-500/10' : 'bg-red-500/10'
+                          tx.type === 'buy' ? 'bg-green-500/10' : 
+                          tx.type === 'sell' ? 'bg-red-500/10' :
+                          tx.type === 'deposit' ? 'bg-blue-500/10' :
+                          'bg-orange-500/10'
                         }`}>
-                          <TrendingUp 
-                            className={`w-5 h-5 ${
-                              tx.type === 'buy' ? 'text-green-500' : 'text-red-500 rotate-180'
-                            }`}
-                          />
+                          {tx.type === 'deposit' ? (
+                            <ArrowDownToLine className="w-5 h-5 text-blue-500" />
+                          ) : (
+                            <TrendingUp 
+                              className={`w-5 h-5 ${
+                                tx.type === 'buy' ? 'text-green-500' : 
+                                tx.type === 'sell' ? 'text-red-500 rotate-180' :
+                                'text-orange-500'
+                              }`}
+                            />
+                          )}
                         </div>
                         <div>
                           <p className="font-bold">
-                            {tx.type === 'buy' ? 'شراء' : 'بيع'} {tx.crypto_symbol}
+                            {tx.type === 'buy' ? 'شراء' : 
+                             tx.type === 'sell' ? 'بيع' :
+                             tx.type === 'deposit' ? 'إيداع' :
+                             'سحب'} {tx.crypto_symbol}
                           </p>
                           <p className="text-sm text-[hsl(var(--muted-foreground))] font-mono">
                             {tx.amount.toFixed(8)} {tx.crypto_symbol}
@@ -169,13 +193,15 @@ const Wallet = () => {
                       </div>
                       <div className="text-right">
                         <p className={`font-mono font-bold ${
-                          tx.type === 'buy' ? 'text-red-500' : 'text-green-500'
+                          tx.type === 'buy' || tx.type === 'withdraw' ? 'text-red-500' : 'text-green-500'
                         }`}>
-                          {tx.type === 'buy' ? '-' : '+'}${tx.total_usd.toFixed(2)}
+                          {tx.type === 'buy' || tx.type === 'withdraw' ? '-' : '+'}${tx.total_usd.toFixed(2)}
                         </p>
-                        <p className="text-xs text-[hsl(var(--muted-foreground))]">
-                          @${tx.price_usd.toFixed(2)}
-                        </p>
+                        {tx.type !== 'deposit' && tx.type !== 'withdraw' && (
+                          <p className="text-xs text-[hsl(var(--muted-foreground))]">
+                            @${tx.price_usd.toFixed(2)}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-1 text-xs text-[hsl(var(--muted-foreground))] mt-2">
