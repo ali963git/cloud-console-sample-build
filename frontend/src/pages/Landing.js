@@ -32,7 +32,7 @@ const Landing = () => {
             <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-none mb-6">
               تداول العملات الرقمية
               <br />
-              <span className="text-[hsl(var(--primary))]" style={{ color: '#F7931A' }}>بثقة واحترافية</span>
+              <span className="bg-gradient-to-r from-[#3B82F6] via-[#06B6D4] to-[#0EA5E9] bg-clip-text text-transparent">بثقة واحترافية</span>
             </h1>
             
             <p className="text-lg sm:text-xl text-[hsl(var(--muted-foreground))] mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -43,8 +43,7 @@ const Landing = () => {
               <Link 
                 to="/register"
                 data-testid="get-started-button"
-                className="trading-button px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 shadow-lg"
-                style={{ backgroundColor: '#F7931A', color: '#000' }}
+                className="trading-button px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 shadow-lg bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white hover:shadow-2xl hover:scale-105 transition-all"
               >
                 ابدأ التداول الآن
                 <ArrowRight className="w-5 h-5" />
@@ -71,9 +70,9 @@ const Landing = () => {
             viewport={{ once: true }}
             className="grid md:grid-cols-3 gap-8"
           >
-            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-colors">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: 'rgba(247, 147, 26, 0.1)' }}>
-                <TrendingUp className="w-7 h-7" style={{ color: '#F7931A' }} />
+            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all hover:shadow-xl hover:shadow-blue-500/10">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4]">
+                <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <h3 className="font-heading text-2xl font-bold mb-4">أسعار حية</h3>
               <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">
@@ -81,9 +80,9 @@ const Landing = () => {
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-colors">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: 'rgba(37, 99, 235, 0.1)' }}>
-                <Shield className="w-7 h-7" style={{ color: '#2563EB' }} />
+            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all hover:shadow-xl hover:shadow-blue-500/10">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-[#8B5CF6] to-[#3B82F6]">
+                <Shield className="w-7 h-7 text-white" />
               </div>
               <h3 className="font-heading text-2xl font-bold mb-4">أمان عالي</h3>
               <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">
@@ -91,9 +90,9 @@ const Landing = () => {
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-colors">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)' }}>
-                <Zap className="w-7 h-7" style={{ color: '#10B981' }} />
+            <div className="p-8 rounded-2xl border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all hover:shadow-xl hover:shadow-blue-500/10">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-[#06B6D4] to-[#0EA5E9]">
+                <Zap className="w-7 h-7 text-white" />
               </div>
               <h3 className="font-heading text-2xl font-bold mb-4">تداول سريع</h3>
               <p className="text-[hsl(var(--muted-foreground))] leading-relaxed">

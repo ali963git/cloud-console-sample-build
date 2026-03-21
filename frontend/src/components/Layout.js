@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={user ? '/dashboard' : '/'} className="font-heading text-2xl font-black" data-testid="logo">
-              <span style={{ color: '#F7931A' }}>Nova</span>Dex
+              <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Nova</span>Dex
             </Link>
 
             {/* Desktop Navigation */}
@@ -46,12 +46,11 @@ const Layout = ({ children }) => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                         isActive
-                          ? 'text-black'
+                          ? 'bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white shadow-lg shadow-blue-500/30'
                           : 'hover:bg-[hsl(var(--accent))]'
                       }`}
-                      style={isActive ? { backgroundColor: '#F7931A' } : {}}
                       data-testid={`nav-${item.path.slice(1)}`}
                     >
                       <Icon className="w-5 h-5" />
@@ -124,12 +123,11 @@ const Layout = ({ children }) => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors ${
+                    className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
                       isActive
-                        ? 'text-black'
+                        ? 'bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white shadow-lg'
                         : 'hover:bg-[hsl(var(--accent))]'
                     }`}
-                    style={isActive ? { backgroundColor: '#F7931A' } : {}}
                   >
                     <Icon className="w-5 h-5" />
                     {item.label}

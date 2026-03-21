@@ -171,10 +171,17 @@ const Trading = () => {
                     <Line 
                       type="monotone" 
                       dataKey="price" 
-                      stroke="#F7931A" 
-                      strokeWidth={2}
+                      stroke="#3B82F6" 
+                      strokeWidth={3}
                       dot={false}
+                      fill="url(#colorPrice)"
                     />
+                    <defs>
+                      <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -195,24 +202,22 @@ const Trading = () => {
               <div className="flex gap-2 mb-6">
                 <button
                   onClick={() => setTradeType('buy')}
-                  className={`flex-1 py-3 rounded-lg font-bold transition-colors ${
+                  className={`flex-1 py-3 rounded-lg font-bold transition-all ${
                     tradeType === 'buy'
-                      ? 'text-white'
-                      : 'bg-transparent border-2 border-[hsl(var(--border))]'
+                      ? 'bg-gradient-to-r from-[#10B981] to-[#059669] text-white shadow-lg shadow-green-500/30'
+                      : 'bg-transparent border-2 border-[hsl(var(--border))] hover:border-green-500'
                   }`}
-                  style={tradeType === 'buy' ? { backgroundColor: '#10B981' } : {}}
                   data-testid="buy-tab"
                 >
                   شراء
                 </button>
                 <button
                   onClick={() => setTradeType('sell')}
-                  className={`flex-1 py-3 rounded-lg font-bold transition-colors ${
+                  className={`flex-1 py-3 rounded-lg font-bold transition-all ${
                     tradeType === 'sell'
-                      ? 'text-white'
-                      : 'bg-transparent border-2 border-[hsl(var(--border))]'
+                      ? 'bg-gradient-to-r from-[#EF4444] to-[#DC2626] text-white shadow-lg shadow-red-500/30'
+                      : 'bg-transparent border-2 border-[hsl(var(--border))] hover:border-red-500'
                   }`}
-                  style={tradeType === 'sell' ? { backgroundColor: '#EF4444' } : {}}
                   data-testid="sell-tab"
                 >
                   بيع
@@ -255,8 +260,11 @@ const Trading = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 rounded-lg font-bold text-lg trading-button disabled:opacity-50 disabled:cursor-not-allowed text-white"
-                  style={{ backgroundColor: tradeType === 'buy' ? '#10B981' : '#EF4444' }}
+                  className={`w-full py-3 rounded-lg font-bold text-lg trading-button disabled:opacity-50 disabled:cursor-not-allowed text-white shadow-lg transition-all ${
+                    tradeType === 'buy' 
+                      ? 'bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-green-500/50' 
+                      : 'bg-gradient-to-r from-[#EF4444] to-[#DC2626] hover:shadow-red-500/50'
+                  }`}
                   data-testid="execute-trade-button"
                 >
                   {loading ? 'جاري التنفيذ...' : (tradeType === 'buy' ? 'شراء' : 'بيع')}

@@ -40,7 +40,7 @@ const Login = () => {
       >
         <div className="text-center mb-8">
           <h1 className="font-heading text-4xl font-black mb-2">
-            <span style={{ color: '#F7931A' }}>Nova</span>Dex
+            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Nova</span>Dex
           </h1>
           <p className="text-[hsl(var(--muted-foreground))]">تسجيل الدخول</p>
         </div>
@@ -93,8 +93,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg font-bold text-lg trading-button disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#F7931A', color: '#000' }}
+              className="w-full py-3 rounded-lg font-bold text-lg trading-button disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white hover:shadow-lg hover:shadow-blue-500/50 transition-all"
               data-testid="login-submit-button"
             >
               {loading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
@@ -104,7 +103,7 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-[hsl(var(--muted-foreground))]">
               ليس لديك حساب؟{' '}
-              <Link to="/register" className="font-bold hover:underline" style={{ color: '#F7931A' }} data-testid="register-link">
+              <Link to="/register" className="font-bold hover:underline text-[#3B82F6]" data-testid="register-link">
                 إنشاء حساب
               </Link>
             </p>

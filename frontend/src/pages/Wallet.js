@@ -71,11 +71,11 @@ const Wallet = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass-effect rounded-xl p-8 mb-8"
+          className="glass-effect rounded-2xl p-8 mb-8 border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all"
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(247, 147, 26, 0.1)' }}>
-              <WalletIcon className="w-6 h-6" style={{ color: '#F7931A' }} />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] shadow-lg shadow-blue-500/30">
+              <WalletIcon className="w-8 h-8 text-white" />
             </div>
             <div>
               <p className="text-sm text-[hsl(var(--muted-foreground))]">إجمالي قيمة المحفظة</p>
@@ -103,7 +103,7 @@ const Wallet = () => {
                 return (
                   <div
                     key={symbol}
-                    className="glass-effect rounded-xl p-4 hover:border-[hsl(var(--primary))] border border-[hsl(var(--border))] transition-colors"
+                    className="glass-effect rounded-xl p-4 hover:border-[#3B82F6] border border-[hsl(var(--border))] transition-all hover:shadow-lg hover:shadow-blue-500/10 cursor-pointer"
                     data-testid={`asset-${symbol}`}
                   >
                     <div className="flex items-center justify-between">
@@ -144,7 +144,7 @@ const Wallet = () => {
                 transactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className="glass-effect rounded-xl p-4 border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-colors"
+                    className="glass-effect rounded-xl p-4 border border-[hsl(var(--border))] hover:border-[#3B82F6] transition-all hover:shadow-lg hover:shadow-blue-500/10"
                     data-testid={`transaction-${tx.id}`}
                   >
                     <div className="flex items-center justify-between mb-2">

@@ -72,36 +72,42 @@ const Dashboard = () => {
           <h1 className="font-heading text-3xl font-bold mb-6">لوحة التحكم</h1>
           
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect" data-testid="portfolio-card">
+            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect hover:border-[#3B82F6] transition-all hover:shadow-xl hover:shadow-blue-500/10" data-testid="portfolio-card">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-bold uppercase tracking-wider text-[hsl(var(--muted-foreground))]">
                   قيمة المحفظة
                 </span>
-                <Wallet className="w-5 h-5 text-[hsl(var(--primary))]" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] flex items-center justify-center">
+                  <Wallet className="w-5 h-5 text-white" />
+                </div>
               </div>
               <p className="font-mono text-3xl font-bold" data-testid="portfolio-value">
                 ${portfolioValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect">
+            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect hover:border-[#06B6D4] transition-all hover:shadow-xl hover:shadow-cyan-500/10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-bold uppercase tracking-wider text-[hsl(var(--muted-foreground))]">
                   رصيد USD
                 </span>
-                <DollarSign className="w-5 h-5 text-green-500" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
+                  <DollarSign className="w-5 h-5 text-white" />
+                </div>
               </div>
               <p className="font-mono text-3xl font-bold" data-testid="usd-balance">
                 ${(wallet?.balances?.USD || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
 
-            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect">
+            <div className="p-6 rounded-xl border border-[hsl(var(--border))] glass-effect hover:border-[#8B5CF6] transition-all hover:shadow-xl hover:shadow-purple-500/10">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-bold uppercase tracking-wider text-[hsl(var(--muted-foreground))]">
                   الأصول
                 </span>
-                <Activity className="w-5 h-5 text-blue-500" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#6366F1] flex items-center justify-center">
+                  <Activity className="w-5 h-5 text-white" />
+                </div>
               </div>
               <p className="font-mono text-3xl font-bold">
                 {wallet ? Object.keys(wallet.balances).length : 0}

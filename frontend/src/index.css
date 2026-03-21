@@ -5,20 +5,23 @@
 @tailwind utilities;
 
 :root {
-  --primary: 24 100% 54%;
-  --secondary: 217 91% 60%;
-  --background-dark: 0 0% 4%;
-  --surface-dark: 0 0% 7%;
-  --surface-border-dark: 0 0% 15%;
-  --background-light: 210 40% 98%;
+  --primary: 217 91% 60%;
+  --primary-light: 213 97% 87%;
+  --secondary: 262 83% 58%;
+  --background-dark: 222 47% 5%;
+  --surface-dark: 217 33% 10%;
+  --surface-border-dark: 217 33% 17%;
+  --background-light: 220 43% 98%;
   --surface-light: 0 0% 100%;
-  --surface-border-light: 214 32% 91%;
+  --surface-border-light: 220 13% 91%;
   --buy-green: 142 76% 36%;
   --sell-red: 0 84% 60%;
-  --text-primary-dark: 0 0% 100%;
-  --text-secondary-dark: 0 0% 63%;
+  --text-primary-dark: 210 40% 98%;
+  --text-secondary-dark: 217 32% 71%;
   --text-primary-light: 222 47% 11%;
   --text-secondary-light: 215 16% 47%;
+  --accent-blue: 199 89% 48%;
+  --accent-cyan: 189 94% 43%;
 }
 
 * {
@@ -112,13 +115,27 @@ body {
 }
 
 .glass-effect {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(16, 23, 42, 0.8);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .light .glass-effect {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent-cyan)) 100%);
+  padding: 2px;
+  border-radius: 16px;
+}
+
+.gradient-border-content {
+  background: hsl(var(--background));
+  border-radius: 14px;
 }
