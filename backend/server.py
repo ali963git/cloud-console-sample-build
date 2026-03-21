@@ -13,8 +13,8 @@ from datetime import datetime, timezone, timedelta
 from passlib.context import CryptContext
 import jwt
 from pycoingecko import CoinGeckoAPI
-import redis.asyncio as redis
 import json
+import time
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -24,8 +24,8 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Redis for caching
-redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
+# Simple in-memory cache (for production deployment)
+cache_store = {}
 
 # CoinGecko API - using demo key
 cg = CoinGeckoAPI(demo_api_key=os.environ['COINGECKO_API_KEY'])
@@ -98,7 +98,20 @@ class Transaction(BaseModel):
     total_usd: float
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-# Helper functions
+# Helper functions for in-memory cache
+def get_cache(key: str):
+    """Get value from cache if not expired"""
+    if key in cache_store:
+        data, expiry = cache_store[key]
+        if time.time() < expiry:
+            return data
+        else:
+            del cache_store[key]
+    return None
+
+def set_cache(key: str, value: any, ttl: int):
+    """Set value in cache with TTL in seconds"""
+    cache_store[key] = (value, time.time() + ttl)
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
@@ -185,13 +198,10 @@ async def login(credentials: UserLogin):
 async def get_crypto_prices(limit: int = 20):
     cache_key = f"prices:{limit}"
     
-    try:
-        cached = await redis_client.get(cache_key)
-        if cached:
-            data = json.loads(cached)
-            return data
-    except:
-        pass
+    # Check cache
+    cached = get_cache(cache_key)
+    if cached:
+        return cached
     
     try:
         data = cg.get_coins_markets(
@@ -216,10 +226,8 @@ async def get_crypto_prices(limit: int = 20):
             for coin in data
         ]
         
-        try:
-            await redis_client.setex(cache_key, 60, json.dumps([r.model_dump() for r in result]))
-        except:
-            pass
+        # Cache for 60 seconds
+        set_cache(cache_key, result, 60)
         
         return result
     except Exception as e:
@@ -229,12 +237,10 @@ async def get_crypto_prices(limit: int = 20):
 async def get_single_price(coin_id: str):
     cache_key = f"price:{coin_id}"
     
-    try:
-        cached = await redis_client.get(cache_key)
-        if cached:
-            return json.loads(cached)
-    except:
-        pass
+    # Check cache
+    cached = get_cache(cache_key)
+    if cached:
+        return cached
     
     try:
         data = cg.get_price(
@@ -256,10 +262,8 @@ async def get_single_price(coin_id: str):
             "volume_24h": data[coin_id].get('usd_24h_vol', 0)
         }
         
-        try:
-            await redis_client.setex(cache_key, 30, json.dumps(result))
-        except:
-            pass
+        # Cache for 30 seconds
+        set_cache(cache_key, result, 30)
         
         return result
     except HTTPException:
@@ -271,12 +275,10 @@ async def get_single_price(coin_id: str):
 async def get_chart_data(coin_id: str, days: int = 7):
     cache_key = f"chart:{coin_id}:{days}"
     
-    try:
-        cached = await redis_client.get(cache_key)
-        if cached:
-            return json.loads(cached)
-    except:
-        pass
+    # Check cache
+    cached = get_cache(cache_key)
+    if cached:
+        return cached
     
     try:
         data = cg.get_coin_market_chart_by_id(
@@ -291,10 +293,8 @@ async def get_chart_data(coin_id: str, days: int = 7):
             "prices": data['prices']
         }
         
-        try:
-            await redis_client.setex(cache_key, 300, json.dumps(result))
-        except:
-            pass
+        # Cache for 5 minutes
+        set_cache(cache_key, result, 300)
         
         return result
     except Exception as e:
@@ -503,6 +503,11 @@ async def get_transactions(current_user: dict = Depends(get_current_user), limit
 async def root():
     return {"message": "NovaDex API - Crypto Trading Platform"}
 
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for deployment"""
+    return {"status": "healthy", "service": "NovaDex API"}
+
 # Include router
 app.include_router(api_router)
 
@@ -523,4 +528,3 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
-    await redis_client.close()

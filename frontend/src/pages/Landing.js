@@ -14,10 +14,10 @@ const Landing = () => {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1772050138768-2107c6e62a03?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGRhcmslMjBkaWdpdGFsJTIwbmV0d29yayUyMGxpbmVzfGVufDB8fHx8MTc3NDEwMzIyM3ww&ixlib=rb-4.1.0&q=85)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: theme === 'dark' ? 0.3 : 0.15
+            background: theme === 'dark' 
+              ? 'linear-gradient(135deg, #0D1B2A 0%, #1B263B 50%, #0D1B2A 100%)'
+              : 'linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 50%, #E0F2FE 100%)',
+            opacity: 1
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(var(--background))] z-0" />
