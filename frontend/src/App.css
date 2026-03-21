@@ -1,34 +1,66 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* App.css */
+.chart-container {
+  width: 100%;
+  height: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.price-ticker {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.price-positive {
+  color: hsl(var(--buy-green));
 }
 
-.App-link {
-    color: #61dafb;
+.price-negative {
+  color: hsl(var(--sell-red));
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.trading-button {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.trading-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.trading-button:active {
+  transform: translateY(0);
+}
+
+.sidebar-nav a {
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-nav a:hover {
+  background-color: hsl(var(--accent));
+}
+
+.sidebar-nav a.active {
+  background-color: hsl(var(--primary));
+  color: black;
+}
+
+scrollbar-width: thin;
+scrollbar-color: hsl(var(--border)) transparent;
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
 }
