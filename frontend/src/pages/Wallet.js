@@ -127,7 +127,7 @@ const Wallet = () => {
                       </div>
                       <div className="text-right">
                         <p className="font-mono font-bold" data-testid={`asset-value-${symbol}`}>
-                          ${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                          ${value.toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </p>
                         <p className="text-sm text-[hsl(var(--muted-foreground))]">
                           {percentage.toFixed(2)}%

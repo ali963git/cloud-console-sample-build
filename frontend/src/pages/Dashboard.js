@@ -82,7 +82,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <p className="font-mono text-3xl font-bold" data-testid="portfolio-value">
-                ${portfolioValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ${portfolioValue.toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
 
@@ -96,7 +96,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <p className="font-mono text-3xl font-bold" data-testid="usd-balance">
-                ${(wallet?.balances?.USD || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ${(wallet?.balances?.USD || 0).toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </p>
             </div>
 
@@ -160,7 +160,7 @@ const Dashboard = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 font-mono font-semibold" data-testid={`price-${coin.symbol}`}>
-                        ${coin.current_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        ${coin.current_price.toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </td>
                       <td className="px-6 py-4">
                         <div className={`flex items-center gap-1 font-mono font-semibold ${
@@ -175,10 +175,10 @@ const Dashboard = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 font-mono">
-                        ${(coin.market_cap / 1e9).toFixed(2)}B
+                        ${(coin.market_cap / 1e9).toFixed(2)} مليار
                       </td>
                       <td className="px-6 py-4 font-mono">
-                        ${(coin.volume_24h / 1e9).toFixed(2)}B
+                        ${(coin.volume_24h / 1e9).toFixed(2)} مليار
                       </td>
                     </tr>
                   ))}

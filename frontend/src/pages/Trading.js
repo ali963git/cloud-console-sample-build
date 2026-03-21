@@ -122,7 +122,7 @@ const Trading = () => {
                   <div>
                     <h2 className="font-heading text-2xl font-bold capitalize">{selectedCoin}</h2>
                     <p className="font-mono text-4xl font-bold mt-2" data-testid="current-price">
-                      ${coinPrice.price_usd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      ${coinPrice.price_usd.toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                   </div>
                   <div className={`flex items-center gap-2 text-2xl font-mono font-bold ${

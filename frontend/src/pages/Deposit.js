@@ -15,7 +15,7 @@ const Deposit = () => {
   const paymentMethods = [
     {
       id: 'card',
-      name: 'بطاقة ائتمان/خصم',
+      name: 'بطاقة ائتمان أو خصم',
       icon: CreditCard,
       description: 'فيزا، ماستركارد، أمريكان إكسبريس',
       gradient: 'from-[#3B82F6] to-[#06B6D4]'
@@ -31,7 +31,7 @@ const Deposit = () => {
       id: 'crypto',
       name: 'عملة رقمية',
       icon: Smartphone,
-      description: 'USDT, USDC, BTC, ETH',
+      description: 'تيثر، يو إس دي سي، بيتكوين، إيثريوم',
       gradient: 'from-[#06B6D4] to-[#0EA5E9]'
     }
   ];
@@ -195,19 +195,19 @@ const Deposit = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="glass-effect rounded-xl p-6 border border-[hsl(var(--border))] bg-gradient-to-br from-[#3B82F6]/5 to-[#06B6D4]/5"
                   >
-                    <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-2">
                       <span className="text-[hsl(var(--muted-foreground))]">المبلغ</span>
-                      <span className="font-mono font-bold text-lg">${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                      <span className="font-mono font-bold text-lg">${parseFloat(amount).toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-[hsl(var(--muted-foreground))]">رسوم المعالجة</span>
-                      <span className="font-mono font-bold text-green-500">$0.00</span>
+                      <span className="font-mono font-bold text-green-500">مجاناً</span>
                     </div>
                     <div className="h-px bg-[hsl(var(--border))] my-3" />
                     <div className="flex justify-between items-center">
                       <span className="font-bold">الإجمالي</span>
                       <span className="font-mono font-bold text-2xl text-[#3B82F6]">
-                        ${parseFloat(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        ${parseFloat(amount).toLocaleString('ar-SA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </span>
                     </div>
                   </motion.div>

@@ -84,7 +84,7 @@ const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-11 pr-4 py-3 rounded-lg bg-[hsl(var(--background))] border border-[hsl(var(--border))] focus:border-[hsl(var(--primary))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))]/20 transition-colors"
-                  placeholder="your@email.com"
+                  placeholder="البريد الإلكتروني"
                   required
                   data-testid="email-input"
                 />
