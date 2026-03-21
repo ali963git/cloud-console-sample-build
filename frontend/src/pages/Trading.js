@@ -147,8 +147,8 @@ const Trading = () => {
               className="glass-effect rounded-xl p-6"
             >
               <h3 className="font-bold mb-4">الرسم البياني (7 أيام)</h3>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
+              <div style={{ width: '100%', height: '320px' }}>
+                <ResponsiveContainer>
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis 
