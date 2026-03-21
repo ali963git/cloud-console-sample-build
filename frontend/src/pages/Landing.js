@@ -35,8 +35,8 @@ const Landing = () => {
               <span className="bg-gradient-to-r from-[#3B82F6] via-[#06B6D4] to-[#0EA5E9] bg-clip-text text-transparent">بثقة واحترافية</span>
             </h1>
             
-            <p className="text-lg sm:text-xl text-[hsl(var(--muted-foreground))] mb-8 max-w-2xl mx-auto leading-relaxed">
-              منصة NovaDex توفر لك أدوات تداول احترافية، أسعار حية، ومحفظة رقمية آمنة لإدارة استثماراتك في العملات الرقمية
+            <p className="text-[hsl(var(--muted-foreground))] mb-8">
+              منصة Cryptix توفر لك أدوات تداول احترافية، أسعار حية، ومحفظة رقمية آمنة لإدارة استثماراتك في العملات الرقمية
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

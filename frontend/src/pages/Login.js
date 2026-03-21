@@ -40,7 +40,7 @@ const Login = () => {
       >
         <div className="text-center mb-8">
           <h1 className="font-heading text-4xl font-black mb-2">
-            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Nova</span>Dex
+            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Cryptix</span>
           </h1>
           <p className="text-[hsl(var(--muted-foreground))]">تسجيل الدخول</p>
         </div>

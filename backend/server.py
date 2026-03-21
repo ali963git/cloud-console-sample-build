@@ -41,7 +41,7 @@ JWT_EXPIRATION_HOURS = int(os.environ.get('JWT_EXPIRATION_HOURS', 24))
 security = HTTPBearer()
 
 # Create the main app
-app = FastAPI(title="NovaDex API")
+app = FastAPI(title="Cryptix API")
 api_router = APIRouter(prefix="/api")
 
 # Models
@@ -501,12 +501,12 @@ async def get_transactions(current_user: dict = Depends(get_current_user), limit
 
 @api_router.get("/")
 async def root():
-    return {"message": "NovaDex API - Crypto Trading Platform"}
+    return {"message": "Cryptix API - Crypto Trading Platform"}
 
 @api_router.get("/health")
 async def health_check():
     """Health check endpoint for deployment"""
-    return {"status": "healthy", "service": "NovaDex API"}
+    return {"status": "healthy", "service": "Cryptix API"}
 
 # Include router
 app.include_router(api_router)
