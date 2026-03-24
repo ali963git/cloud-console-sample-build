@@ -41,7 +41,7 @@ const Register = () => {
       >
         <div className="text-center mb-8">
           <h1 className="font-heading text-4xl font-black mb-2">
-            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Cryptix</span>
+            <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Extensionus</span>
           </h1>
           <p className="text-[hsl(var(--muted-foreground))]">إنشاء حساب جديد</p>
         </div>

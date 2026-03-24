@@ -1,6 +1,6 @@
 {
-  "appId": "com.cryptix.app",
-  "appName": "Cryptix",
+  "appId": "com.extensionus.app",
+  "appName": "Extensionus",
   "webDir": "build",
   "bundledWebRuntime": false,
   "server": {

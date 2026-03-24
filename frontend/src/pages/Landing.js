@@ -36,7 +36,7 @@ const Landing = () => {
             </h1>
             
             <p className="text-[hsl(var(--muted-foreground))] mb-8">
-              منصة Cryptix توفر لك أدوات تداول احترافية، أسعار حية، ومحفظة رقمية آمنة لإدارة استثماراتك في العملات الرقمية
+              منصة Extensionus توفر لك أدوات تداول احترافية، أسعار حية، ومحفظة رقمية آمنة لإدارة استثماراتك في العملات الرقمية
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

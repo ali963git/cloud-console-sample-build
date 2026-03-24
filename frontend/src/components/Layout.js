@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to={user ? '/dashboard' : '/'} className="font-heading text-2xl font-black" data-testid="logo">
-              <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Cryptix</span>
+              <span className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">Extensionus</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -158,7 +158,7 @@ const Layout = ({ children }) => {
         <footer className="border-t border-[hsl(var(--border))] py-8">
           <div className="container mx-auto px-4 text-center">
             <p className="text-sm text-[hsl(var(--muted-foreground))]">
-              © 2026 Cryptix. جميع الحقوق محفوظة.
+              © 2026 Extensionus. جميع الحقوق محفوظة.
             </p>
           </div>
         </footer>
